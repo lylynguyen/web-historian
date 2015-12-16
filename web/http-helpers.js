@@ -1,4 +1,5 @@
 var path = require('path');
+
 var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
 
@@ -10,12 +11,22 @@ exports.headers = headers = {
   'Content-Type': "text/html"
 };
 
+
 exports.serveAssets = function(res, asset, callback) {
+  var html;
+  fs.readFile('./public/index.html', function (err, contents){
+    html = contents.toString()
+    // console.log("contents:",contents)
+
+  })
+    return html;
+
   // Write some code here that helps serve up your static files!
   // (Static files are things like html (yours or archived from others...),
   // css, or anything that doesn't change often.)
 };
-
+// exports.html;
+exports.serveAssets();
 
 
 // As you progress, keep thinking about what helper functions you can put here!
