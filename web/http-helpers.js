@@ -14,19 +14,14 @@ exports.headers = headers = {
 
 
 exports.serveAssets = function(res, asset, callback) {
-  // var html = '';
   fs.readFile(asset, function(err, data){
-    // var html = data;
-    
     res.writeHead(200, headers);  
-  //      // httphelpers.serveAssets(res, htmlAsset);
-  res.write(data);
-        res.end();
-      }
+    res.write(data);
+    res.end();
+    }
   );
 };
 // exports.html;
-exports.serveAssets();
 
 
 // As you progress, keep thinking about what helper functions you can put here!

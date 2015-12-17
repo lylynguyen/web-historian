@@ -25,35 +25,51 @@ exports.initialize = function(pathsObj) {
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function(callback) { 
+exports.readListOfUrls = function(cbOnRead) { 
+
+  console.log("what are you?", cbOnRead);
   // var fixtureName = "www.google.com"
-  console.log("data is here too", paths.list);
+  // console.log("data is here too", paths.list);
   // console.log("res:"res);
   fs.readFile(paths.list, 'utf-8', function (err, data){
     // console.log("data magically appears", data
+    if(err){return;}
     var result = data.split("\n");
-    callback(result);
-    
+    cbOnRead(result);
   });
+
 };
 
-exports.isUrlInList = function(target, callback) {
+exports.isUrlInList = function(target, cbOnList) {
   exports.readListOfUrls(function(result){
     results = _.contains(target);
-      callback(results);
+      cbOnList(results);
     }
   );
 };
 
-exports.addUrlToList = function(url, callback) {
+exports.addUrlToList = function(url, cbOnAddUrl) {
   exports.readListOfUrls(function(result){
     result = result.push(url);
-    callback(result);
+    cbOnAddUrl(result);
   });
 };
 
-exports.isUrlArchived = function() {
+exports.isUrlArchived = function(path, callback) {
+  console.log("paths sites", paths.archivedSites + '/' + path);
+  path = '/' + path;
+  fs.exists(paths.archivedSites + path, function(exists){
+    if(exists) {
+      callback(exists);
+    } else{
+      callback(!exists);
+    }
+
+  });
 };
 
-exports.downloadUrls = function() {
+exports.downloadUrls = function(arraySites) {
+  _.each(arraySites, function(val){
+   fs.open(paths.archivedSites + '/' + val, 'w');
+   });
 };
