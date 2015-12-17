@@ -8,22 +8,22 @@ var htmlAsset = archive.paths.siteAssets + '/index.html';
 //get post
 
 exports.handleRequest = function (req, res) {
-  if(req.url === "/"){
-    console.log("url",req.url)
-    httpHelpers.serveAssets(res,htmlAsset);
-    console.log("handlereq:",htmlAsset)
+  if(req.method === 'GET'){
+    if(req.url === "/"){
+      console.log("url",req.url)
+      httpHelpers.serveAssets(res,htmlAsset);
+      console.log("handlereq:",htmlAsset)
+    } else{
+     res.writeHead(404);
+     res.end("Error!"); 
+    } 
   }
-
-  // if(req.method === 'GET'){
-  //   console.log("req:",req)
-  //   archive.readListOfUrls(req);
-  //   console.log("run");
-  // }
-  // else{
-  //   // console.log(req)
-  // }
 };
   
+    //   archive.readListOfUrls(req);
+    //   return res;
+    //   console.log("run");
+    // }
   // if(req.url === '/' ) {
   //   // if(req.method === 'GET'){
   //     // httpHelpers.serveAssets(res, htmlAsset);
