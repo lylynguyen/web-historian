@@ -1,5 +1,4 @@
 var path = require('path');
-
 var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
 
@@ -14,7 +13,8 @@ exports.headers = headers = {
 
 
 exports.serveAssets = function(res, asset, statusCode, callback) {
-  fs.readFile(asset, function(err, data){
+ fs.readFile(asset, function(err, data){
+    if(err){}
     if(statusCode === undefined){
       statusCode = 200;
     }
@@ -25,6 +25,7 @@ exports.serveAssets = function(res, asset, statusCode, callback) {
     }
   );
 };
+
 // exports.html;
 
 
