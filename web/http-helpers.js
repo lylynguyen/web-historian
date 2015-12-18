@@ -13,10 +13,14 @@ exports.headers = headers = {
 };
 
 
-exports.serveAssets = function(res, asset, callback) {
+exports.serveAssets = function(res, asset, statusCode, callback) {
   fs.readFile(asset, function(err, data){
-    res.writeHead(200, headers);  
+    if(statusCode === undefined){
+      statusCode = 200;
+    }
+    res.writeHead(statusCode, headers);  
     res.write(data);
+    if(callback){callback(data);}
     res.end();
     }
   );

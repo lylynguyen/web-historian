@@ -26,13 +26,7 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(cbOnRead) { 
-
-  console.log("what are you?", cbOnRead);
-  // var fixtureName = "www.google.com"
-  // console.log("data is here too", paths.list);
-  // console.log("res:"res);
   fs.readFile(paths.list, 'utf-8', function (err, data){
-    // console.log("data magically appears", data
     if(err){return;}
     var result = data.split("\n");
     cbOnRead(result);
@@ -56,7 +50,6 @@ exports.addUrlToList = function(url, cbOnAddUrl) {
 };
 
 exports.isUrlArchived = function(path, callback) {
-  console.log("paths sites", paths.archivedSites + '/' + path);
   path = '/' + path;
   fs.exists(paths.archivedSites + path, function(exists){
     if(exists) {
